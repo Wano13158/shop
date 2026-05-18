@@ -20,6 +20,7 @@
             <nav>
                 <a href="#two" class="link">Топ моделі</a>
                 <a href="2.html" class="link">Каталог моделей</a>
+                <a href="#cart" class="link">🛒 Кошик (<span data-cart-count>0</span>)</a>
                 <a href="#thre" class="link">Відгуки</a>
             </nav>
             <div class="header-stats">
@@ -71,34 +72,34 @@
 </div>
 
             <section class="catalog">
-    <div class="card">
+    <div class="card" data-price="900" data-stock="0" data-name="Різдвяні цукерниці">
         <span class="badge hot">Хіт</span>
         <img src="https://learn.logikaschool.com/uploads/student/5343230/693eaa8e64310.png">
         <h3>Різдвяні цукерниці</h3>
         <p>Пластик: PLA</p>
         <p class="no">Немає в наявності</p>
         <p>Ціна: 900 грн</p>
-        <a class="bat" href="https://t.me/OfficialGrut123">Купити</a>
+        <a class="bat" href="#" data-add-cart>Додати в кошик</a>
         </div>
 
-    <div class="card">
+    <div class="card" data-price="60" data-stock="1" data-name="Міні Ґрінч">
         <span class="badge new">Новинка</span>
         <img src="https://learn.logikaschool.com/uploads/student/5343230/693eb34f71494.png">
         <h3>Міні Ґрінч</h3>
         <p>Пластик: PLA</p>
         <p class="last">Є в наявності (1)</p>
         <p>Ціна: 60 грн</p>
-        <a class="bat" href="https://t.me/OfficialGrut123">Купити</a>
+        <a class="bat" href="#" data-add-cart>Додати в кошик</a>
         </div>
 
-    <div class="card">
+    <div class="card" data-price="60" data-stock="10" data-name="Тримач для ручки у вигляді краба">
         <span class="badge">Топ</span>
         <img src="https://makerworld.bblmw.com/makerworld/model/USc0651851b5bca8/design/2025-12-12_c374eca06b8ac8.jpeg?x-oss-process=image/resize,w_1000/format,webp">
         <h3>Тримач для ручки у вигляді краба</h3>
         <p>Пластик: PLA</p>
         <p class="yes">Є в наявності (10+)</p>
         <p>Ціна: 60 грн</p>
-        <a class="bat" href="https://t.me/OfficialGrut123">Купити</a>
+        <a class="bat" href="#" data-add-cart>Додати в кошик</a>
         </div>
 </section>
 
@@ -119,6 +120,17 @@
     </div>
 
 </section>
+<section class="cart" id="cart">
+                <h2>🛒 Кошик</h2>
+                <ul id="cartItems" class="cart-items">
+                    <li class="empty">Кошик порожній</li>
+                </ul>
+                <p class="cart-total">Разом: <b id="cartTotal">0 грн</b></p>
+                <div class="cart-actions">
+                    <button class="control-btn" id="clearCart">Очистити кошик</button>
+                    <button class="control-btn" id="checkoutBtn" data-checkout disabled>Оплатити в Telegram</button>
+                </div>
+            </section>
     </main>
     <footer>
         <p>Grut 3D Print Shop</p>

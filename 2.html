@@ -20,7 +20,7 @@
             <p>🖨️ <b>Великі моделі</b> (довгий друк / багато пластику) роблю не завжди й тільки після узгодження.</p>
             </div>
             <div class="controls">
-                <button class="control-btn cart-open" onclick="document.getElementById('cart').scrollIntoView({behavior:'smooth'})">🛒 Кошик</button>
+                <button class="control-btn cart-open" onclick="document.getElementById('cart').scrollIntoView({behavior:'smooth'})">🛒 Кошик (<span data-cart-count>0</span>)</button>
                 <input id="search" class="search" placeholder="Пошук моделі...">
                 <button class="control-btn" data-filter="all">Усі</button>
                 <button class="control-btn" data-filter="stock">Тільки в наявності</button>
@@ -52,7 +52,10 @@
                     <li class="empty">Кошик порожній</li>
                 </ul>
                 <p class="cart-total">Разом: <b id="cartTotal">0 грн</b></p>
+                <div class="cart-actions">
                 <button class="control-btn" id="clearCart">Очистити кошик</button>
+                <button class="control-btn" id="checkoutBtn" data-checkout disabled>Оплатити в Telegram</button>
+            </div>
             </section>
             </header>
             <footer>
