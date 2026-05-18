@@ -31,6 +31,7 @@ filterButtons.forEach(btn => {
 });
 
 const STORAGE_KEY = 'grut_shop_cart_v1';
+const ORDERS_KEY = 'grut_shop_orders_v1';
 const TG_ORDER_URL = 'https://t.me/OfficialGrut123';
 
 const cartItemsEl = document.getElementById('cartItems');
@@ -38,8 +39,10 @@ const cartTotalEl = document.getElementById('cartTotal');
 const clearCartBtn = document.getElementById('clearCart');
 const checkoutBtn = document.getElementById('checkoutBtn');
 const cartCounters = document.querySelectorAll('[data-cart-count]');
+const ordersListEl = document.getElementById('ordersList');
 
 let cart = loadCart();
+let orders = loadOrders();
 
 function loadCart() {
   try {
@@ -71,11 +74,87 @@ function updateCartCounters() {
   });
 }
 
-function getOrderMessage() {
-  const lines = cart.map(item => `• ${item.name} × ${item.qty} = ${item.price * item.qty} грн`);
-  lines.push(`Разом: ${getTotalPrice()} грн`);
-  lines.push('Мій контакт для підтвердження замовлення:');
-  return `Привіт! Хочу замовити:${'\n'}${lines.join('\n')}`;
+
+function loadOrders() {
+  try {
+    const raw = localStorage.getItem(ORDERS_KEY);
+    if (!raw) return [];
+    const parsed = JSON.parse(raw);
+    return Array.isArray(parsed) ? parsed : [];
+  } catch {
+    return [];
+  }
+}
+
+function saveOrders() {
+  localStorage.setItem(ORDERS_KEY, JSON.stringify(orders));
+}
+
+function renderOrders() {
+  if (!ordersListEl) return;
+  if (!orders.length) {
+    ordersListEl.innerHTML = '<li class="empty">Поки що замовлень немає</li>';
+    return;
+  }
+
+  ordersListEl.innerHTML = orders.map(order => `
+    <li class="order-item">
+      <div class="order-top">
+        <b>Замовлення #${order.id} — ${order.customer.name}</b>
+        <span class="status ${order.status === 'Прийнято' ? 'accepted' : 'pending'}">${order.status}</span>
+      </div>
+      <p>ID клієнта: ${order.customer.id} | Номер: ${order.customer.phone}</p>
+      <p>${order.items.map(item => `${item.name} × ${item.qty}`).join(', ')}</p>
+      <p>Сума: <b>${order.total} грн</b></p>
+      <button class="control-btn" data-accept-order="${order.id}">Позначити як прийнято</button>
+    </li>
+  `).join('');
+}
+
+function createOrder(profile) {
+  const order = {
+    id: Date.now(),
+    customer: profile,
+    items: cart.map(item => ({ name: item.name, qty: item.qty, price: item.price })),
+    total: getTotalPrice(),
+    status: 'В очікуванні'
+  };
+  orders.unshift(order);
+  saveOrders();
+  renderOrders();
+}
+
+function askCustomerProfile() {
+  const id = prompt('Введіть ID замовника (наприклад: 1):', '1')?.trim();
+  if (!id) return null;
+
+  const name = prompt('Введіть імʼя замовника:', 'Іван')?.trim();
+  if (!name) return null;
+
+  const phone = prompt('Введіть номер телефону:', '+380992931923')?.trim();
+  if (!phone) return null;
+
+  return { id, name, phone };
+}
+
+function getOrderMessage(profile) {
+  const orderLines = cart.map((item, index) =>
+    `${index + 1}. ${item.name} × ${item.qty} — ${item.price * item.qty} грн`
+  );
+
+  return [
+    '🛍️ НОВЕ ЗАМОВЛЕННЯ',
+    '',
+    '👤 Дані клієнта:',
+    `ID: ${profile.id}`,
+    `Імʼя: ${profile.name}`,
+    `Номер: ${profile.phone}`,
+    '',
+    '📦 Товари:',
+    ...orderLines,
+    '',
+    `💰 Разом: ${getTotalPrice()} грн`
+  ].join('\n');
 }
 
 function goToTelegramCheckout() {
@@ -84,8 +163,19 @@ function goToTelegramCheckout() {
     return;
   }
 
-  const url = `${TG_ORDER_URL}?text=${encodeURIComponent(getOrderMessage())}`;
+  const profile = askCustomerProfile();
+  if (!profile) {
+    alert('Щоб оформити замовлення, заповніть ID, імʼя та номер телефону.');
+    return;
+  }
+
+  createOrder(profile);
+  const url = `${TG_ORDER_URL}?text=${encodeURIComponent(getOrderMessage(profile))}`;
   window.open(url, '_blank');
+
+  cart = [];
+  saveCart();
+  renderCart();
 }
 
 function renderCart() {
@@ -173,4 +263,16 @@ document.querySelectorAll('[data-checkout]').forEach(btn => {
 
 setupCartButtons();
 renderCart();
+renderOrders();
 applyFilters();
+
+ordersListEl?.addEventListener('click', (event) => {
+  const button = event.target.closest('[data-accept-order]');
+  if (!button) return;
+  const orderId = Number(button.dataset.acceptOrder);
+  const order = orders.find(item => item.id === orderId);
+  if (!order) return;
+  order.status = 'Прийнято';
+  saveOrders();
+  renderOrders();
+});
