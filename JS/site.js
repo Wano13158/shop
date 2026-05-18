@@ -71,11 +71,37 @@ function updateCartCounters() {
   });
 }
 
-function getOrderMessage() {
-  const lines = cart.map(item => `• ${item.name} × ${item.qty} = ${item.price * item.qty} грн`);
-  lines.push(`Разом: ${getTotalPrice()} грн`);
-  lines.push('Мій контакт для підтвердження замовлення:');
-  return `Привіт! Хочу замовити:${'\n'}${lines.join('\n')}`;
+function askCustomerProfile() {
+  const id = prompt('Введіть ID замовника (наприклад: 1):', '1')?.trim();
+  if (!id) return null;
+
+  const name = prompt('Введіть імʼя замовника:', 'Іван')?.trim();
+  if (!name) return null;
+
+  const phone = prompt('Введіть номер телефону:', '+380992931923')?.trim();
+  if (!phone) return null;
+
+  return { id, name, phone };
+}
+
+function getOrderMessage(profile) {
+  const orderLines = cart.map((item, index) =>
+    `${index + 1}. ${item.name} × ${item.qty} — ${item.price * item.qty} грн`
+  );
+
+  return [
+    '🛍️ НОВЕ ЗАМОВЛЕННЯ',
+    '',
+    '👤 Дані клієнта:',
+    `ID: ${profile.id}`,
+    `Імʼя: ${profile.name}`,
+    `Номер: ${profile.phone}`,
+    '',
+    '📦 Товари:',
+    ...orderLines,
+    '',
+    `💰 Разом: ${getTotalPrice()} грн`
+  ].join('\n');
 }
 
 function goToTelegramCheckout() {
@@ -84,7 +110,13 @@ function goToTelegramCheckout() {
     return;
   }
 
-  const url = `${TG_ORDER_URL}?text=${encodeURIComponent(getOrderMessage())}`;
+  const profile = askCustomerProfile();
+  if (!profile) {
+    alert('Щоб оформити замовлення, заповніть ID, імʼя та номер телефону.');
+    return;
+  }
+
+  const url = `${TG_ORDER_URL}?text=${encodeURIComponent(getOrderMessage(profile))}`;
   window.open(url, '_blank');
 }
 
