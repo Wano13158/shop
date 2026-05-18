@@ -5,6 +5,8 @@ const filterButtons = document.querySelectorAll('[data-filter]');
 let activeFilter = 'all';
 
 function applyFilters() {
+  if (!cards.length) return;
+
   const q = (search?.value || '').trim().toLowerCase();
   cards.forEach(card => {
     const name = (card.dataset.name || '').toLowerCase();
@@ -28,16 +30,72 @@ filterButtons.forEach(btn => {
   });
 });
 
-const cart = [];
+const STORAGE_KEY = 'grut_shop_cart_v1';
+const TG_ORDER_URL = 'https://t.me/OfficialGrut123';
+
 const cartItemsEl = document.getElementById('cartItems');
 const cartTotalEl = document.getElementById('cartTotal');
 const clearCartBtn = document.getElementById('clearCart');
+const checkoutBtn = document.getElementById('checkoutBtn');
+const cartCounters = document.querySelectorAll('[data-cart-count]');
+
+let cart = loadCart();
+
+function loadCart() {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if (!raw) return [];
+    const parsed = JSON.parse(raw);
+    return Array.isArray(parsed) ? parsed : [];
+  } catch {
+    return [];
+  }
+}
+
+function saveCart() {
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(cart));
+}
+
+function getTotalItems() {
+  return cart.reduce((sum, item) => sum + item.qty, 0);
+}
+
+function getTotalPrice() {
+  return cart.reduce((sum, item) => sum + item.price * item.qty, 0);
+}
+
+function updateCartCounters() {
+  const totalItems = getTotalItems();
+  cartCounters.forEach(counter => {
+    counter.textContent = totalItems;
+  });
+}
+
+function getOrderMessage() {
+  const lines = cart.map(item => `• ${item.name} × ${item.qty} = ${item.price * item.qty} грн`);
+  lines.push(`Разом: ${getTotalPrice()} грн`);
+  lines.push('Мій контакт для підтвердження замовлення:');
+  return `Привіт! Хочу замовити:${'\n'}${lines.join('\n')}`;
+}
+
+function goToTelegramCheckout() {
+  if (!cart.length) {
+    alert('Додайте товар у кошик перед оплатою.');
+    return;
+  }
+
+  const url = `${TG_ORDER_URL}?text=${encodeURIComponent(getOrderMessage())}`;
+  window.open(url, '_blank');
+}
 
 function renderCart() {
+  updateCartCounters();
+
   if (!cartItemsEl || !cartTotalEl) return;
   if (cart.length === 0) {
     cartItemsEl.innerHTML = '<li class="empty">Кошик порожній</li>';
     cartTotalEl.textContent = '0 грн';
+    if (checkoutBtn) checkoutBtn.disabled = true;
     return;
   }
 
@@ -45,8 +103,8 @@ function renderCart() {
     .map(item => `<li><span>${item.name} × ${item.qty}</span><b>${item.price * item.qty} грн</b></li>`)
     .join('');
 
-  const total = cart.reduce((sum, item) => sum + item.price * item.qty, 0);
-  cartTotalEl.textContent = `${total} грн`;
+  cartTotalEl.textContent = `${getTotalPrice()} грн`;
+  if (checkoutBtn) checkoutBtn.disabled = false;
 }
 
 function addToCart(card) {
@@ -70,6 +128,7 @@ function addToCart(card) {
     cart.push({ name, price, qty: 1, stock });
   }
 
+  saveCart();
   renderCart();
 }
 
@@ -83,8 +142,18 @@ document.querySelectorAll('[data-add-cart]').forEach(button => {
 });
 
 clearCartBtn?.addEventListener('click', () => {
-  cart.length = 0;
+  cart = [];
+  saveCart();
   renderCart();
+});
+
+checkoutBtn?.addEventListener('click', goToTelegramCheckout);
+
+document.querySelectorAll('[data-checkout]').forEach(btn => {
+  btn.addEventListener('click', (event) => {
+    event.preventDefault();
+    goToTelegramCheckout();
+  });
 });
 
 renderCart();
