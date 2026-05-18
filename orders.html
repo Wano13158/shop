@@ -1,0 +1,50 @@
+<html>
+<head>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+  <title>Кошик та замовлення</title>
+  <link rel="stylesheet" href="CSS/style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+  <header>
+    <h1>Кошик та замовлення</h1>
+    <p class="subtitle">Окрема сторінка для оформлення і перегляду статусу</p>
+    <nav>
+      <a href="main.html" class="link">🏠 На головну</a>
+      <a href="#cart" class="link">🛒 Кошик (<span data-cart-count>0</span>)</a>
+      <a href="#orders" class="link">📋 Замовлення</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="cart" id="cart">
+      <h2>🛒 Кошик</h2>
+      <ul id="cartItems" class="cart-items">
+        <li class="empty">Кошик порожній</li>
+      </ul>
+      <p class="cart-total">Разом: <b id="cartTotal">0 грн</b></p>
+      <div class="cart-actions">
+        <button class="control-btn" id="clearCart">Очистити кошик</button>
+        <button class="control-btn" id="checkoutBtn" data-checkout disabled>Оплатити в Telegram</button>
+      </div>
+    </section>
+
+    <section class="orders" id="orders">
+      <h2>📋 Замовлення</h2>
+      <ul id="ordersList" class="orders-list">
+        <li class="empty">Поки що замовлень немає</li>
+      </ul>
+    </section>
+  </main>
+
+  <footer>
+    <p>Grut 3D Print Shop</p>
+    <a href="main.html">Головна</a>
+    <a href="2.html">Каталог</a>
+  </footer>
+  <script src="JS/site.js"></script>
+</body>
+</html>
