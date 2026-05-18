@@ -7,6 +7,7 @@
     <title>Каталог</title>
         <link rel="stylesheet" href="CSS/style1.css">
         <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
         <body>
             <a href="javascript:history.back()" class="back-btn">← Назад</a>
@@ -19,64 +20,32 @@
              Через перебої зі світлом та ситуацію в країні друк іноді може займати більше часу.
             Також <b>великі моделі</b> (довгий друк / багато пластику) роблю не завжди й тільки після узгодження.
             </p>
-            <p class="warn-small">
-            Напиши в Telegram — скажу точний час і чи зможу надрукувати саме твою модель.
-            </p>
             </div>
-            <section class="catalog">
-    <div class="card">
+            <div class="controls">
+                <input id="search" class="search" placeholder="Пошук моделі...">
+                <button class="control-btn" data-filter="all">Усі</button>
+                <button class="control-btn" data-filter="stock">Тільки в наявності</button>
+                <button class="control-btn" data-filter="cheap">До 100 грн</button>
+            </div>
+            <section class="catalog" id="catalog">
+    <div class="card" data-price="900" data-stock="0" data-name="Різдвяні цукерниці">
         <img src="https://learn.logikaschool.com/uploads/student/5343230/693eaa8e64310.png">
-        <h3>Різдвяні цукерниці</h3>
-        <p>Пластик: PLA</p>
-        <p class="no">Немає в наявності</p>
-        <p>Ціна: 900 грн</p>
-        <a class="bat" href="https://t.me/OfficialGrut123">Купити</a>
-        </div>
-
-    <div class="card">
+        <h3>Різдвяні цукерниці</h3><p>Пластик: PLA</p><p class="no">Немає в наявності</p><p>Ціна: 900 грн</p><a class="bat" href="https://t.me/OfficialGrut123">Купити</a></div>
+    <div class="card" data-price="60" data-stock="1" data-name="Міні Ґрінч">
         <img src="https://learn.logikaschool.com/uploads/student/5343230/693eb34f71494.png">
-        <h3>Міні Ґрінч</h3>
-        <p>Пластик: PLA</p>
-        <p class="last">Є в наявності (1)</p>
-        <p>Ціна: 60 грн</p>
-        <a class="bat" href="https://t.me/OfficialGrut123">Купити</a>
-        </div>
-
-    <div class="card">
+        <h3>Міні Ґрінч</h3><p>Пластик: PLA</p><p class="last">Є в наявності (1)</p><p>Ціна: 60 грн</p><a class="bat" href="https://t.me/OfficialGrut123">Купити</a></div>
+    <div class="card" data-price="150" data-stock="10" data-name="Тримач для ручки у вигляді краба">
         <img src="https://makerworld.bblmw.com/makerworld/model/USc0651851b5bca8/design/2025-12-12_c374eca06b8ac8.jpeg?x-oss-process=image/resize,w_1000/format,webp">
-        <h3>Тримач для ручки у вигляді краба</h3>
-        <p>Пластик: PLA</p>
-        <p class="yes">Є в наявності (10+)</p>
-        <p>Ціна: 150 грн</p>
-        <a class="bat" href="https://t.me/OfficialGrut123">Купити</a>
-        </div>
-
-     <div class="card">
+        <h3>Тримач для ручки у вигляді краба</h3><p>Пластик: PLA</p><p class="yes">Є в наявності (10+)</p><p>Ціна: 150 грн</p><a class="bat" href="https://t.me/OfficialGrut123">Купити</a></div>
+    <div class="card" data-price="45" data-stock="6" data-name="Восьминіг брелок">
         <img src="https://makerworld.bblmw.com/makerworld/model/USea5cf9cb2d0057/design/2025-01-23_9d59945f3212d8.jpg?x-oss-process=image/resize,w_1000/format,webp">
-        <h3>Восьминіг брелок</h3>
-        <p>Пластик: PLA</p>
-        <p class="last">Є в наявності (6)</p>
-        <p>Ціна: 45 грн</p>
-        <a class="bat" href="https://t.me/OfficialGrut123">Купити</a>
-        </div> 
-    
-    <div class="card">
+        <h3>Восьминіг брелок</h3><p>Пластик: PLA</p><p class="last">Є в наявності (6)</p><p>Ціна: 45 грн</p><a class="bat" href="https://t.me/OfficialGrut123">Купити</a></div>
+    <div class="card" data-price="175" data-stock="1" data-name="Тримач окуляр у вигляді мішки">
         <img src="https://makerworld.bblmw.com/makerworld/model/USd31b8f084104ae/design/2025-02-21_357f57c50d6cd.jpg?x-oss-process=image/resize,w_1000/format,webp">
-        <h3>Тримач окуляр у вигляді мішки</h3>
-        <p>Пластик: PLA</p>
-        <p class="last">Є в наявності (1)</p>
-        <p>Ціна: 175 грн</p>
-        <a class="bat" href="https://t.me/OfficialGrut123">Купити</a>
-        </div>
-
-    <div class="card">
+        <h3>Тримач окуляр у вигляді мішки</h3><p>Пластик: PLA</p><p class="last">Є в наявності (1)</p><p>Ціна: 175 грн</p><a class="bat" href="https://t.me/OfficialGrut123">Купити</a></div>
+    <div class="card" data-price="130" data-stock="0" data-name="Різдвяні цукерниці mini">
         <img src="https://makerworld.bblmw.com/makerworld/model/DSM00000002030095/design/2025-11-23_640c438a562e2.png?x-oss-process=image/resize,w_1000/format,webp">
-        <h3>Різдвяні цукерниці</h3>
-        <p>Пластик: PLA</p>
-        <p class="no">Немає в наявності</p>
-        <p>Ціна: 130 грн</p>
-        <a class="bat" href="https://t.me/OfficialGrut123">Купити</a>
-        </div>  
+        <h3>Різдвяні цукерниці</h3><p>Пластик: PLA</p><p class="no">Немає в наявності</p><p>Ціна: 130 грн</p><a class="bat" href="https://t.me/OfficialGrut123">Купити</a></div>
 </section>
             </header>
             <footer>
@@ -85,6 +54,7 @@
             <a href="#two">Каталог</a>
             <a href="https://t.me/OfficialGrut123" target="_blank">Telegram</a>
     </footer>
+    <script src="JS/site.js"></script>
         </body>
 
 </html>
