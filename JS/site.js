@@ -103,7 +103,7 @@ function renderOrders() {
         <b>Замовлення #${order.id} — ${order.customer.name}</b>
         <span class="status ${order.status === 'Прийнято' ? 'accepted' : 'pending'}">${order.status}</span>
       </div>
-      <p>ID клієнта: ${order.customer.id} | Номер: ${order.customer.phone}</p>
+      <p>Номер: ${order.customer.phone}</p>
       <p>${order.items.map(item => `${item.name} × ${item.qty}`).join(', ')}</p>
       <p>Сума: <b>${order.total} грн</b></p>
     </li>
@@ -124,16 +124,13 @@ function createOrder(profile) {
 }
 
 function askCustomerProfile() {
-  const id = prompt('Введіть ID замовника (наприклад: 1):', '1')?.trim();
-  if (!id) return null;
-
   const name = prompt('Введіть імʼя замовника:', 'Іван')?.trim();
   if (!name) return null;
 
   const phone = prompt('Введіть номер телефону:', '+380992931923')?.trim();
   if (!phone) return null;
 
-  return { id, name, phone };
+  return { name, phone };
 }
 
 function getOrderMessage(profile) {
@@ -145,7 +142,6 @@ function getOrderMessage(profile) {
     '🛍️ НОВЕ ЗАМОВЛЕННЯ',
     '',
     '👤 Дані клієнта:',
-    `ID: ${profile.id}`,
     `Імʼя: ${profile.name}`,
     `Номер: ${profile.phone}`,
     '',
@@ -164,7 +160,7 @@ function goToTelegramCheckout() {
 
   const profile = askCustomerProfile();
   if (!profile) {
-    alert('Щоб оформити замовлення, заповніть ID, імʼя та номер телефону.');
+    alert('Щоб оформити замовлення, заповніть імʼя та номер телефону.');
     return;
   }
 
