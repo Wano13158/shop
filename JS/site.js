@@ -106,7 +106,6 @@ function renderOrders() {
       <p>ID клієнта: ${order.customer.id} | Номер: ${order.customer.phone}</p>
       <p>${order.items.map(item => `${item.name} × ${item.qty}`).join(', ')}</p>
       <p>Сума: <b>${order.total} грн</b></p>
-      <button class="control-btn" data-accept-order="${order.id}">Позначити як прийнято</button>
     </li>
   `).join('');
 }
@@ -266,13 +265,3 @@ renderCart();
 renderOrders();
 applyFilters();
 
-ordersListEl?.addEventListener('click', (event) => {
-  const button = event.target.closest('[data-accept-order]');
-  if (!button) return;
-  const orderId = Number(button.dataset.acceptOrder);
-  const order = orders.find(item => item.id === orderId);
-  if (!order) return;
-  order.status = 'Прийнято';
-  saveOrders();
-  renderOrders();
-});
