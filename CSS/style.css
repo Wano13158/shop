@@ -54,3 +54,9 @@ nav { display: flex; justify-content: center; gap: 16px; margin-top: 25px; backg
 .cart-items .empty{justify-content:center;opacity:.8}
 .cart-total{font-size:18px;margin:10px 0 14px}
 .cart-actions{display:flex;gap:10px;flex-wrap:wrap;justify-content:flex-end}
+
+.bat.bat-unavailable{background:#64748b;opacity:.95;position:relative;pointer-events:auto;cursor:not-allowed}
+.card .no + p + .bat.bat-unavailable{pointer-events:auto;opacity:.95}
+.bat.bat-unavailable:hover{background:#475569;transform:none}
+.bat.bat-unavailable::after{content:attr(data-delay-message);position:absolute;left:50%;bottom:calc(100% + 10px);transform:translateX(-50%);min-width:260px;max-width:320px;background:#0b1220;color:#e2e8f0;padding:10px 12px;border-radius:10px;border:1px solid #334155;box-shadow:0 8px 20px rgba(0,0,0,.5);font-size:13px;line-height:1.35;font-weight:400;font-family:sans-serif;opacity:0;pointer-events:none;transition:opacity .2s ease;z-index:5}
+.bat.bat-unavailable:hover::after{opacity:1}

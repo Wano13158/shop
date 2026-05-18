@@ -132,6 +132,21 @@ function addToCart(card) {
   renderCart();
 }
 
+
+function setupCartButtons() {
+  document.querySelectorAll('[data-add-cart]').forEach(button => {
+    const card = button.closest('.card');
+    if (!card) return;
+    const stock = Number(card.dataset.stock || 0);
+
+    if (stock <= 0) {
+      button.classList.add('bat-unavailable');
+      button.textContent = 'Додати в кошик (не в наявності)';
+      button.setAttribute('data-delay-message', 'Замовлення буде з затримкою, бо товару зараз немає в наявності.');
+    }
+  });
+}
+
 document.querySelectorAll('[data-add-cart]').forEach(button => {
   button.addEventListener('click', (event) => {
     event.preventDefault();
@@ -156,5 +171,6 @@ document.querySelectorAll('[data-checkout]').forEach(btn => {
   });
 });
 
+setupCartButtons();
 renderCart();
 applyFilters();
