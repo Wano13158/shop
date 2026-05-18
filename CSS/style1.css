@@ -1,0 +1,476 @@
+body {
+    background-image: linear-gradient(to bottom,#1d2c4e, #101a47);
+}
+
+section {
+    margin-bottom: 120px;
+}
+
+html{
+    scroll-behavior: smooth;
+    overflow-x: hidden;
+}
+
+
+.logo{
+    text-align: center;
+    opacity: 0.8;
+}
+
+header{
+    text-align: center;
+    font-family: "Press Start 2P", system-ui;
+    position: relative;
+}
+
+.press-start-2p-regular {
+  font-family: "Press Start 2P", system-ui;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.about-us{
+    font-family: sans-serif;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 60px;
+    gap: 40px;
+    font-size: 20px;
+
+}
+
+header{
+    padding: 20px;
+}
+
+.about-us p {
+    max-width: 500px;
+}
+
+.about-us img {
+    border-radius: 10px;
+    height: 360px;
+}
+
+.left {
+    position: absolute;
+    left: -300px;        /* старт за экраном */
+    top: 40%;
+    transform: translateY(-50%);
+    animation: slideInLeft 1.5s ease-out forwards;
+
+    display: block;
+    pointer-events: none;
+    opacity: 0.18;
+}
+
+@keyframes slideInLeft {
+    from {
+        left: -300px;
+        opacity: 0;
+    }
+    to {
+        left: -70px;      /* куда выезжает */
+        opacity: 1;
+    }
+}
+
+.right {
+    position: absolute;
+    right: -400px;          /* старт за экраном */
+    top: 40%;
+    transform: translateY(-50%);
+    animation: slideInRight 1.5s ease-out forwards;
+    display: block;
+    pointer-events: none;
+    opacity: 0.18;
+}
+
+@keyframes slideInRight {
+    from {
+        right: -400px;
+        opacity: 0;
+    }
+    to {
+        right: -150px;        /* конечная позиция */
+        opacity: 1;
+    }
+}
+
+.catalog{
+    font-family: sans-serif;
+    margin: 40px,0px;
+    display: grid;
+    gap: 40px;
+    padding: 40px;
+    grid-template-columns: repeat(3, 1fr);
+    color: #aaa;
+   
+}
+
+.catalog h1 {
+    text-align: center;
+}
+
+.card img{
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+}
+.yes {
+    color: green;
+}
+
+.no {
+    color: rgb(187, 5, 5);
+}
+
+.card .no + p + .bat {
+    pointer-events: none;
+    opacity: 0.4;
+}
+
+.last {
+    color: yellow;
+}
+
+.bat {
+    background-color: rgb(31, 158, 216);
+    margin: 10px;
+    font-size: 22px;
+    display: inline-block;
+    color: white;
+    padding: 12px 24px;
+    border-radius: 10px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: transform 0.2s ease, background-color 0.3s, box-shadow 0.3s;
+}
+
+.bat:hover {
+    background-color: rgb(34, 197, 94);
+    transform: scale(1.08);
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+}
+
+.bat:active {
+    transform: scale(0.95);
+}
+
+
+.vid {
+    text-align: center;
+    font-family: sans-serif;
+    color: #aaa;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.review{
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.review:hover{
+    transform: translateY(-6px);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.6);
+}
+
+main{
+    text-align: center;
+    font-family: sans-serif;
+    color: #eaeaea;
+}
+
+.card {
+    background: #1f1f1f;
+    border: 1px solid #2a2a2a;
+    box-shadow: 0 0 15px rgba(0,0,0,0.4);
+    padding: 15px;
+    text-align: center;
+    border-radius: 10px;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.6);
+}
+
+footer{
+    font-family: "Press Start 2P", system-ui;
+    background: #111;
+    color: #aaa;
+    padding: 30px 10px;
+    margin-top: 40px;
+    max-width: 1200px;
+    margin: auto;
+    text-align: center;
+}
+
+.back-btn {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    z-index: 1000;
+
+    background: rgba(0,0,0,0.6);
+    color: #eaeaea;
+    text-decoration: none;
+
+    padding: 10px 16px;
+    border-radius: 14px;
+    font-size: 16px;
+
+    border: 1px solid #1f2937;
+    box-shadow: 0 6px 14px rgba(0,0,0,0.6);
+
+    transition: background 0.2s, transform 0.15s;
+}
+
+.back-btn:hover {
+    background: #111827;
+}
+
+.back-btn:active {
+    transform: scale(0.96);
+}
+
+
+.review {
+    background: #1f1f1f;
+    padding: 20px;
+    border-radius: 10px;
+    max-width: 600px;
+    margin: 20px auto;
+    color: #eaeaea;
+}
+
+.stars {
+    color: #facc15;
+    font-size: 20px;
+}
+
+header h1 {
+    color: #eaeaea;
+    text-shadow: 0 0 10px rgba(0,0,0,0.8);
+}
+
+nav {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin-top: 25px;
+    background: rgba(0,0,0,0.35);
+    border-radius: 16px;
+    width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 12px 20px;
+}
+
+
+.link {
+    background: #0b0f1a;
+    color: #eaeaea;
+    border: 1px solid #1f2937;
+    text-decoration: none;
+    box-shadow: 0 6px 14px rgba(0,0,0,0.6);
+    transition: background 0.2s, transform 0.15s;
+    padding: 10px 22px;
+    font-size: 16px;
+    border-radius: 12px;
+}
+
+
+.link:hover {
+    background: #111827;
+    transform: translateY(-2px);
+}
+
+.link:active {
+    transform: translateY(0);
+}
+
+
+@media (max-width: 768px) {
+
+    /* ❌ ховаємо фонові принтери */
+    .left,
+    .right {
+        display: none;
+    }
+
+    
+
+    /* HEADER */
+    header {
+        padding: 60px 15px 80px;
+    }
+
+    header h1 {
+        font-size: 22px;
+        line-height: 1.4;
+    }
+
+    /* NAV */
+    nav {
+        flex-direction: column;
+        gap: 12px;
+        padding: 15px;
+    }
+
+    .link {
+        width: 100%;
+        text-align: center;
+        font-size: 16px;
+        padding: 12px;
+    }
+
+    /* ABOUT */
+    .about-us {
+        flex-direction: column;
+        padding: 30px 15px;
+        text-align: center;
+    }
+
+    .about-us img {
+        width: 100%;
+        height: auto;
+        max-width: 350px;
+    }
+
+    /* CATALOG */
+    .catalog {
+        grid-template-columns: repeat(2, 1fr);
+        padding: 20px;
+        gap: 30px;
+    }
+
+    .card img {
+        max-height: 220px;
+        object-fit: cover;
+    }
+
+    /* REVIEWS */
+    .reviews-grid {
+        grid-template-columns: 1fr;
+        padding: 0 15px;
+    }
+
+    .review {
+        font-size: 14px;
+    }
+
+    /* FOOTER */
+    footer {
+        font-size: 12px;
+        padding: 30px 15px;
+    }
+
+    /* контейнер кнопок */
+    nav {
+        background: none;
+        padding: 0;
+        gap: 14px;
+    }
+
+    /* кнопки */
+    .link {
+        width: 100%;
+        max-width: 280px;
+        margin: 0 auto;
+
+
+        background: linear-gradient(180deg, #0f172a, #020617);
+        color: #eaeaea;
+
+        border: 1px solid #1e293b;
+        border-radius: 18px;
+
+        padding: 14px 0;
+        font-size: 17px;
+        letter-spacing: 0.5px;
+
+        box-shadow:
+            inset 0 1px 0 rgba(255,255,255,0.05),
+            0 8px 20px rgba(0,0,0,0.6);
+
+        transition: transform 0.15s ease, box-shadow 0.15s ease;
+        -webkit-tap-highlight-color: transparent;
+    }
+
+    .link:active {
+        transform: scale(0.97);
+        box-shadow: 0 4px 10px rgba(0,0,0,0.6);
+    }
+
+    /* головна кнопка */
+    .link.main {
+        background: linear-gradient(180deg, #38d9ff, #00a3d9);
+        color: #000;
+        font-weight: bold;
+        border: none;
+    }
+}
+
+@media (max-width: 975px) {
+
+    /* ❌ ховаємо фонові принтери */
+    .left,
+    .right {
+        display: none;
+    }
+}
+
+@media (max-width: 545px) {
+
+   .catalog {
+        grid-template-columns: 1fr;
+        padding: 20px;
+        gap: 30px;
+    }
+}
+
+.warn{
+    max-width: 1100px;
+    margin: 20px auto 35px;
+    padding: 18px 22px;
+    border-radius: 14px;
+
+    background: rgba(0,0,0,0.35);
+    border: 1px solid rgba(250, 204, 21, 0.35);
+
+    color: #eaeaea;
+    box-shadow: 0 12px 25px rgba(0,0,0,0.55);
+    text-align: left;
+    font-family: sans-serif;
+}
+
+.warn h3{
+    margin: 0 0 10px 0;
+    font-size: 18px;
+    color: #facc15;
+}
+
+.warn p{
+    margin: 0 0 8px 0;
+    line-height: 1.6;
+    color: #dbe3ff;
+}
+
+.warn b{
+    color: #ffffff;
+}
+
+.warn-small{
+    opacity: 0.9;
+    font-size: 14px;
+}
+
+/* мобілка */
+@media (max-width: 768px){
+    .warn{
+        margin: 15px 15px 25px;
+        padding: 16px;
+    }
+}
